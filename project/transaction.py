@@ -16,22 +16,41 @@ class Transaction:
 
 def main():
     record_details, balance = create_transaction()
+    create_record(record_details)
+
+
+def create_record(record):
     with open("transaction_details.csv", "a") as file:
-        file.write(record_details.transaction_details())
-    print(f"Balance: {balance} ")
+        file.write(record.transaction_details())
+    
+
 
 def get_customer_name():
-    customer_name = input("Enter customer name: ").strip()
-    if not customer_name:
-        raise ValueError("Invalid customer name")
-    return customer_name
+    while True:
+        try:
+            customer_name = input("Enter customer name: ").strip()
+            if not customer_name:
+                raise ValueError("Invalid customer name")
+            return customer_name
+        except ValueError: 
+            pass
+
+def get_cash(prompt):                       #Cs50p ps fuel gauge
+    while True:
+        try:
+            cash = int(input(prompt).strip())
+            if cash <= 0:
+                raise ValueError
+            return cash
+        except ValueError:
+            pass 
 
 def create_transaction():
     customer_name = get_customer_name()
-    purchased_amount = float(input("Amount purchased: ").strip())
-    cash_received = float(input("Cash received: ").strip())
+    purchased_amount = get_cash("Amount Purchased: ")
+    cash_received = get_cash("Cash Received: ")
     amount_due = cash_received - purchased_amount
-    return [Transaction(customer_name, purchased_amount), amount_due]
+    return [Transaction(customer_name, purchased_amount), amount_due]   #CS50P oop lecture
 
 
 if __name__ == "__main__":
