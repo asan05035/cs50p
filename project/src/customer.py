@@ -1,4 +1,8 @@
 import txn
+import purchase as purchase
+
+def main():
+    create_transaction()
 
 def get_name():         #cs50p exceptionlecture
     """ Get customer name"""
@@ -25,7 +29,10 @@ def get_cash(prompt):  #Cs50p ps fuel gauge
 def create_transaction():   #CS50P oop lecture
     """ Creating new trsanction object """
     customer_name = get_name()
-    purchased_amount = get_cash("Amount Purchased: ")
+    purchased_amount = purchase.amount()
     cash_received = get_cash("Cash Received: ")
     balance = cash_received - purchased_amount
     return txn.Transaction(customer_name, purchased_amount, cash_received, balance)   
+
+if __name__ == "__main__":
+    main()

@@ -1,4 +1,4 @@
-import customer
+import customer as customer
 
 def main():
     """ Create new customer purchase record and saving it"""
